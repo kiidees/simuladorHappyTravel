@@ -1,0 +1,40 @@
+CREATE TABLE Clientes (
+  idClientes INT NOT NULL,
+  nombre VARCHAR(45),
+  apellidos VARCHAR(45),
+  email VARCHAR(45),
+  telefono VARCHAR(45),
+  PRIMARY KEY (idClientes));
+
+CREATE TABLE Reservas (
+  idReservas INT NOT NULL,
+  idClientes INT,
+  destino VARCHAR(45),
+  fechaLlegada DATE,
+  fechaSalida DATE,
+  autobus VARCHAR(45),
+  nombreHotel VARCHAR(45),
+  ninos INT,
+  adultos INT,
+  PRIMARY KEY (idReservas),
+  INDEX fk_Reservas_Clientes_idx idClientes ASC VISIBLE,
+  CONSTRAINT fk_Reservas_Clientes
+    FOREIGN KEY (idClientes)
+    REFERENCES Clientes (idClientes)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+CREATE TABLE HotelReservas (
+  idHotel INT NOT NULL,
+  nombreHotel VARCHAR(45),
+  numHab INT,
+  tipoHab VARCHAR(45),
+  servicioHotel VARCHAR(45),
+  idClientes INT,
+  PRIMARY KEY (idHotel),
+  CONSTRAINT fk_HotelReservas_Clientes1
+    FOREIGN KEY (idClientes)
+    REFERENCES Clientes (idClientes)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
